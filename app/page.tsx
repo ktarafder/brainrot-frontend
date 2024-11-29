@@ -9,7 +9,7 @@ export default function Home() {
       <Image
         src="/image.webp" // Path to the image inside the public folder
         alt="Brainrot Banner"
-        width={1920} // Set the width to fill the screen
+        width={1910} // Set the width to fill the screen
         height={10000} // This is still necessary for the image's intrinsic aspect ratio.
         layout="intrinsic" // Ensures aspect ratio is preserved but respects our CSS height
         objectFit="cover" // Ensures the image covers the banner area
