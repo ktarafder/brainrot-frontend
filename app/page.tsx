@@ -1,14 +1,43 @@
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 export default function Home() {
   // Words to float around the screen
-  const floatingWords = ["skibidi", "gyatt", "rizz", "sigma", "alpha", "beta", "omega", "grindset",
+  const floatingWords = [
+    "skibidi", "gyatt", "rizz", "sigma", "alpha", "beta", "omega", "grindset",
     "amogus", "sus", "imposter", "sussy", "impostor", "suspect", "amongus",
-    "gooning", "goon", "gooner", "kpop", 
+    "gooning", "goon", "gooner", "kpop",
     "boomer", "doomer", "zoomer",
     "copium", "cope", "seethe", "mald", "cringe", "based", "redpilled",
     "bluepilled", "blackpilled", "blud", "dawg", "ishowspeed", "bussing", "poggers",
-    "glizzy", "thug", "slatt", "twin"];
+    "glizzy", "thug", "slatt", "twin",
+  ];
+
+  const [floatingStyles, setFloatingStyles] = useState<
+    { left: string; top: string; animationDelay: string }[]
+  >([]);
+
+  useEffect(() => {
+    // Only generate random values after the component is mounted
+    const styles = floatingWords.map(() => ({
+      left: `${Math.random() * 100}vw`,
+      top: `${Math.random() * 100}vh`,
+      animationDelay: `${Math.random() * 2}s`, // Random delay up to 2 seconds
+    }));
+    setFloatingStyles(styles);
+  }, []); // Run only once on mount
+
+  // Reference to audio
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const handleFileInputClick = () => {
+    if (audioRef.current) {
+      audioRef.current.play().catch((error) => {
+        console.error("Error playing audio:", error);
+      });
+    }
+  };
 
   return (
     <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-black relative overflow-hidden">
@@ -17,19 +46,20 @@ export default function Home() {
 
       {/* Floating Words */}
       <div className="absolute inset-0 z-100 pointer-events-none">
-        {floatingWords.map((word, index) => (
-          <div
-            key={index}
-            className="floating-word text-white text-lg font-bold absolute z-10"
-            style={{
-              animationDelay: `${index * 0.5}s`,
-              left: `${Math.random() * 100}vw`,
-              top: `${Math.random() * 100}vh`,
-            }}
-          >
-            {word}
-          </div>
-        ))}
+        {floatingStyles.length > 0 &&
+          floatingWords.map((word, index) => (
+            <div
+              key={index}
+              className="floating-word text-white text-lg font-bold absolute z-10"
+              style={{
+                left: floatingStyles[index]?.left,
+                top: floatingStyles[index]?.top,
+                animationDelay: floatingStyles[index]?.animationDelay,
+              }}
+            >
+              {word}
+            </div>
+          ))}
       </div>
 
       {/* Glitch Banner */}
@@ -70,10 +100,30 @@ export default function Home() {
           <input
             type="file"
             className="border-2 border-white rounded-md p-2 bg-transparent text-white relative z-10 cursor-pointer hover:bg-white hover:text-black transition-colors duration-300"
+            onClick={handleFileInputClick}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900 via-red-500 to-green-700 opacity-10 blur-md group-hover:opacity-50 group-hover:blur-xl" />
         </div>
       </main>
+
+      {/* Glitch Banner */}
+      <div className="w-full h-[300px] relative overflow-hidden z-1">
+        <Image
+          src="/image.webp" // Path to the image inside the public folder
+          alt="Brainrot Banner"
+          width={1920}
+          height={1080}
+          layout="intrinsic"
+          objectFit="cover"
+          className="animate-glitch"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black to-black opacity-50 mix-blend-overlay pointer-events-none" />
+      </div>
+
+      {/* Hidden Audio Element */}
+      <audio ref={audioRef} src="brainrot-theme.mp3" preload="auto" />
     </div>
   );
 }
+
