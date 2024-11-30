@@ -1,26 +1,55 @@
-
 import Image from "next/image";
 
 export default function Home() {
+  // Words to float around the screen
+  const floatingWords = ["skibidi", "gyatt", "rizz", "sigma", "alpha", "beta", "omega", "grindset",
+    "amogus", "sus", "imposter", "sussy", "impostor", "suspect", "amongus",
+    "gooning", "goon", "gooner", "kpop", 
+    "boomer", "doomer", "zoomer",
+    "copium", "cope", "seethe", "mald", "cringe", "based", "redpilled",
+    "bluepilled", "blackpilled", "blud", "dawg", "ishowspeed", "bussing", "poggers",
+    "glizzy", "thug", "slatt", "twin"];
+
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-black">
-    {/* Banner Image */}
-    <div className="w-full h-[20px] overflow-hidden">
-      <Image
-        src="/image.webp" // Path to the image inside the public folder
-        alt="Brainrot Banner"
-        width={1920} // Set the width to fill the screen
-        height={10000} // This is still necessary for the image's intrinsic aspect ratio.
-        layout="intrinsic" // Ensures aspect ratio is preserved but respects our CSS height
-        objectFit="cover" // Ensures the image covers the banner area
-        priority
-      />
-    </div>
+    <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-black relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-r from-purple-900 via-black to-green-900 opacity-30 mix-blend-difference" />
 
+      {/* Floating Words */}
+      <div className="absolute inset-0 z-100 pointer-events-none">
+        {floatingWords.map((word, index) => (
+          <div
+            key={index}
+            className="floating-word text-white text-lg font-bold absolute z-10"
+            style={{
+              animationDelay: `${index * 0.5}s`,
+              left: `${Math.random() * 100}vw`,
+              top: `${Math.random() * 100}vh`,
+            }}
+          >
+            {word}
+          </div>
+        ))}
+      </div>
 
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        {/* Title Section */}
-        <h1 className="text-4xl sm:text-5xl font-bold text-white">
+      {/* Glitch Banner */}
+      <div className="w-full h-[300px] relative overflow-hidden z-1">
+        <Image
+          src="/image.webp" // Path to the image inside the public folder
+          alt="Brainrot Banner"
+          width={1920}
+          height={1080}
+          layout="intrinsic"
+          objectFit="cover"
+          className="animate-glitch"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black to-black opacity-50 mix-blend-overlay pointer-events-none" />
+      </div>
+
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start z-10">
+        {/* Title Section with Glitch Effect */}
+        <h1 className="text-4xl sm:text-5xl font-bold text-white relative before:content-[''] before:absolute before:-top-0.5 before:left-0 before:right-0 before:h-full before:bg-gradient-to-r from-purple-500 via-red-500 to-green-500 before:blur-md before:opacity-50 animate-glitch-text">
           Brainrot Scanner
         </h1>
 
@@ -36,12 +65,13 @@ export default function Home() {
         </ol>
 
         {/* File Dropbox Section */}
-        <div className="flex flex-col gap-4 items-center justify-center border-2 border-white rounded-lg p-8 bg-gray-800 text-white">
-          <p>Drag and drop your files here</p>
+        <div className="flex flex-col gap-4 items-center justify-center border-2 border-white rounded-lg p-8 bg-gray-800 text-white relative group hover:shadow-[0_0_10px_rgba(255,0,255,0.8)] transition-shadow duration-300">
+          <p className="animate-flicker">Drag and drop your files here</p>
           <input
             type="file"
-            className="border-2 border-white rounded-md p-2 bg-transparent text-white"
+            className="border-2 border-white rounded-md p-2 bg-transparent text-white relative z-10 cursor-pointer hover:bg-white hover:text-black transition-colors duration-300"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-900 via-red-500 to-green-700 opacity-10 blur-md group-hover:opacity-50 group-hover:blur-xl" />
         </div>
       </main>
     </div>
