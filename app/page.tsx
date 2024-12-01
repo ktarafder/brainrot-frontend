@@ -52,13 +52,14 @@ export default function Home() {
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
-  
+
       try {
+        setShowTerminal(true);
         const response = await fetch('http://127.0.0.1:5000/upload', {
           method: 'POST',
           body: formData,
         });
-  
+
         if (response.ok) {
           const data = await response.json();
           console.log('File uploaded successfully:', data);
@@ -95,34 +96,31 @@ export default function Home() {
       </div>
 
       {showTerminal && (
-  <div className="overlay">
-    <VimTerminal onExit={handleTerminalExit} />
-  </div>
-)}
+        <div className="overlay">
+          <VimTerminal onExit={handleTerminalExit} />
+        </div>
+      )}
 
-<button
-  onClick={() => setShowTerminal(true)}
-  className="fixed bottom-4 right-4 p-4 bg-purple-600 text-white rounded-full"
->
-  Open Terminal
-</button>
+      <button
+        onClick={() => setShowTerminal(true)}
+        className="fixed bottom-4 right-4 p-4 bg-purple-600 text-white rounded-full"
+      >
+        Open Terminal
+      </button>
 
 
 
       {/* Glitch Banner */}
-      <div className="w-full h-[300px] relative overflow-hidden z-1">
-        <Image
-          src="/image.webp" // Path to the image inside the public folder
-          alt="Brainrot Banner"
-          width={1920}
-          height={1080}
-          layout="intrinsic"
-          objectFit="cover"
-          className="animate-glitch"
-          priority
-        />
+      <div className="w-full h-[500px] relative overflow-hidden z-1">
+        <div
+          className="w-full h-full bg-top bg-cover bg-no-repeat"
+          style={{
+            backgroundImage: "url('/image1.jpg')",
+          }}
+        ></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black to-black opacity-50 mix-blend-overlay pointer-events-none" />
       </div>
+
 
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start z-10">
         {/* Title Section with Glitch Effect */}
@@ -156,19 +154,16 @@ export default function Home() {
       </main>
 
       {/* Glitch Banner */}
-      <div className="w-full h-[300px] relative overflow-hidden z-1">
-        <Image
-          src="/image.webp" // Path to the image inside the public folder
-          alt="Brainrot Banner"
-          width={1920}
-          height={1080}
-          layout="intrinsic"
-          objectFit="cover"
-          className="animate-glitch"
-          priority
-        />
+      <div className="w-full h-[500px] relative overflow-hidden z-1">
+        <div
+          className="w-full h-full bg-bottom bg-cover bg-no-repeat"
+          style={{
+            backgroundImage: "url('/image2.jpg')",
+          }}
+        ></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black to-black opacity-50 mix-blend-overlay pointer-events-none" />
       </div>
+
 
       {/* Hidden Audio Element */}
       <audio ref={audioRef} src="brainrot-theme.mp3" preload="auto" />
