@@ -1,0 +1,39 @@
+.vim-terminal {
+    background-color: #1e1e1e;
+    color: #c5c8c6;
+    font-family: monospace;
+    height: 600px; /* Adjust as needed */
+    width: 80%;
+    max-width: 800px;
+    border: 1px solid #444;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .terminal-content {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+  
+  .command-line {
+    padding: 5px 10px;
+    border-top: 1px solid #444;
+    min-height: 1em;
+  }
+  
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    background-color: #c5c8c6;
+    animation: blink 1s step-start 0s infinite;
+  }
+  
+  @keyframes blink {
+    50% {
+      background-color: transparent;
+    }
+  }
+  

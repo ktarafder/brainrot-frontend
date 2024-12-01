@@ -1,8 +1,16 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import VimTerminal from "@/components/VimTerminal";
 
 export default function Home() {
+  const [showTerminal, setShowTerminal] = useState(false);
+
+  // Function to handle terminal exit
+  const handleTerminalExit = () => {
+    setShowTerminal(false);
+  };
+
   // Words to float around the screen
   const floatingWords = [
     "skibidi", "gyatt", "rizz", "sigma", "alpha", "beta", "omega", "grindset",
@@ -85,6 +93,21 @@ export default function Home() {
             </div>
           ))}
       </div>
+
+      {showTerminal && (
+  <div className="overlay">
+    <VimTerminal onExit={handleTerminalExit} />
+  </div>
+)}
+
+<button
+  onClick={() => setShowTerminal(true)}
+  className="fixed bottom-4 right-4 p-4 bg-purple-600 text-white rounded-full"
+>
+  Open Terminal
+</button>
+
+
 
       {/* Glitch Banner */}
       <div className="w-full h-[300px] relative overflow-hidden z-1">
