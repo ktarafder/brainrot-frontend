@@ -119,7 +119,7 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
         const terms = data.terms;
 
         // Format the terms for display
-        const formattedTerms = ['Brainrot Terms:', ...terms.map((term: any, index: number) => `${index + 1}. ${term}`)];
+        const formattedTerms = ['Brainrot Terms:', ...terms.map((term: string, index: number) => `${index + 1}. ${term}`)];
 
         setTerminalContent((prev) => [...prev, ...formattedTerms]);
       } catch (error) {
@@ -223,6 +223,7 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
               ];
               setTerminalContent((prev) => [...prev, ...termInfo]);
             } catch (error) {
+              console.log(error);
               setTerminalContent((prev) => [...prev, `Unknown command or term: ${cmd}`]);
             }
           }
