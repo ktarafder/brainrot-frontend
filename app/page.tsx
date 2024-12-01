@@ -39,6 +39,30 @@ export default function Home() {
     }
   };
 
+  const handleFileInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      try {
+        const response = await fetch('http://127.0.0.1:5000/upload', {
+          method: 'POST',
+          body: formData,
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          console.log('File uploaded successfully:', data);
+        } else {
+          console.error('File upload failed:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
+    }
+  }
+
   return (
     <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-black relative overflow-hidden">
       {/* Animated Background */}
@@ -99,8 +123,10 @@ export default function Home() {
           <p className="animate-flicker">Drag and drop your files here</p>
           <input
             type="file"
+            accept=".pdf, .doc, .docx, .txt"
             className="border-2 border-white rounded-md p-2 bg-transparent text-white relative z-10 cursor-pointer hover:bg-white hover:text-black transition-colors duration-300"
             onClick={handleFileInputClick}
+            onChange={handleFileInputChange}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900 via-red-500 to-green-700 opacity-10 blur-md group-hover:opacity-50 group-hover:blur-xl" />
         </div>
