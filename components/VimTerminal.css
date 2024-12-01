@@ -22,15 +22,18 @@
   .command-line {
     padding: 5px 10px;
     border-top: 1px solid #444;
-    min-height: 1em;
+    min-height: 0.5em;
   }
   
   .cursor {
     display: inline-block;
     width: 8px;
+    height: 1em;
     background-color: #c5c8c6;
     animation: blink 1s step-start 0s infinite;
+    vertical-align: text-bottom; /* Change from 'bottom' to 'text-bottom' */
   }
+  
   
   @keyframes blink {
     50% {

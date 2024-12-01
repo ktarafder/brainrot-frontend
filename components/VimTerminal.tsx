@@ -11,11 +11,9 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
   const terminalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Disable background scrolling when VimTerminal is open
     document.body.style.overflow = 'hidden';
   
     return () => {
-      // Re-enable background scrolling when VimTerminal is closed
       document.body.style.overflow = '';
     };
   }, []);
@@ -53,7 +51,7 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
   ];
 
   const asciiArtLines = asciiArt.length;
-  const TOTAL_LINES = 30; // Adjust as needed
+  const TOTAL_LINES = 30; 
   const emptyLinesCount = Math.floor((TOTAL_LINES - asciiArtLines) / 2);
   const emptyLines = new Array(emptyLinesCount).fill('');
 
@@ -69,7 +67,6 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
   }, []);
 
   useEffect(() => {
-    // Scroll to the bottom whenever content changes
     if (terminalRef.current) {
       const contentDiv = terminalRef.current.querySelector('.terminal-content');
       if (contentDiv) {
@@ -102,11 +99,9 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
   };
 
   const executeCommand = async (cmd: string) => {
-    // Append the command to the content
     setTerminalContent((prev) => [...prev, `:${cmd}`]);
 
     if (cmd === 'clear') {
-        // Clear the terminal content and reset to initial state
         setTerminalContent([
           ...emptyLines,
           ...asciiArt,
@@ -215,7 +210,6 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
     } 
     else {
         {
-            // Assume the command is a brainrot term
             try {
               const response = await fetch(`http://127.0.0.1:8000/api/${cmd}`);
               if (!response.ok) {
@@ -243,15 +237,16 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
         ))}
       </div>
       <div className="command-line">
-        {mode === 'command' ? (
-          <>
-            :{command}
-            <span className="cursor"> </span>
-          </>
-        ) : (
-          <span>&nbsp;</span>
-        )}
-      </div>
+  {mode === 'command' ? (
+    <>
+      :{command}
+      <span className="cursor">&nbsp;</span> {/* Use &nbsp; here */}
+    </>
+  ) : (
+    <span>&nbsp;</span>
+  )}
+</div>
+
     </div>
   );
 };
