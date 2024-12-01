@@ -10,6 +10,17 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
   const [command, setCommand] = useState('');
   const terminalRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    // Disable background scrolling when VimTerminal is open
+    document.body.style.overflow = 'hidden';
+  
+    return () => {
+      // Re-enable background scrolling when VimTerminal is closed
+      document.body.style.overflow = '';
+    };
+  }, []);
+  
+
   // Your ASCII art
   const asciiArt = [
     '                 ⠀⠀⠀⢀⣴⣶⠀⢀⣴⣶⡄⠀⠀⠀',
@@ -90,15 +101,137 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
     }
   };
 
-  const executeCommand = (cmd: string) => {
+  const executeCommand = async (cmd: string) => {
     // Append the command to the content
     setTerminalContent((prev) => [...prev, `:${cmd}`]);
 
-    if (cmd === 'chill_guy') {
+    if (cmd === 'clear') {
+        // Clear the terminal content and reset to initial state
+        setTerminalContent([
+          ...emptyLines,
+          ...asciiArt,
+          ...emptyLines,
+          '',
+        ]);
+    }
+    else if (cmd === 'brainrot') {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/brainrot');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        const terms = data.terms;
+
+        // Format the terms for display
+        const formattedTerms = ['Brainrot Terms:', ...terms.map((term: any, index: number) => `${index + 1}. ${term}`)];
+
+        setTerminalContent((prev) => [...prev, ...formattedTerms]);
+      } catch (error) {
+        setTerminalContent((prev) => [...prev, `Error fetching brainrot terms: ${(error as Error).message}`]);
+      }
+    } 
+    else if (cmd == 'random') {
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/brainrot/random');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            const termInfo = [
+                `Term: ${data.term}`,
+                `Definition: ${data.definition}`,
+                `Example: ${data.example}`,
+            ];
+            setTerminalContent((prev) => [...prev, ...termInfo]);
+        } catch (error) {
+            setTerminalContent((prev) => [...prev, `Error fetching random brainrot term: ${(error as Error).message}`]);
+        }
+    }
+    else if (cmd === 'don pollo') {
+        try {
+          const response = await fetch('http://127.0.0.1:8000/api/don-pollo');
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          const donPolloInfo = [
+            `Name: ${data.name}`,
+            `Title: ${data.title}`,
+            '',
+            'Backstory:',
+            data.backstory,
+            '',
+            'Achievements:',
+            ...data.achievements.map((achievement: string) => `- ${achievement}`),
+            '',
+            `Vibe: ${data.vibe}`,
+            '',
+            'Quotes:',
+            ...data.quotes.map((quote: string) => `- "${quote}"`),
+            '',
+            data.message,
+          ];
+          setTerminalContent((prev) => [...prev, ...donPolloInfo]);
+        } catch (error) {
+          setTerminalContent((prev) => [
+            ...prev,
+            `Error fetching Don Pollo info: ${(error as Error).message}`,
+          ]);
+        }
+    }
+    else if (cmd === 'rizzlord') {
+        try {
+          const response = await fetch('http://127.0.0.1:8000/rizzlord');
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          const rizzlordInfo = [
+            `Definition: ${data.rizzlord.definition}`,
+            '',
+            'Example:',
+            data.rizzlord.example,
+            '',
+            'Backstory:',
+            data.rizzlord.backstory,
+            '',
+            'Criteria:',
+            ...data.rizzlord.criteria.map((criterion: string) => `- ${criterion}`),
+            '',
+            `Message: ${data.rizzlord.message}`,
+          ];
+          setTerminalContent((prev) => [...prev, ...rizzlordInfo]);
+        } catch (error) {
+          setTerminalContent((prev) => [
+            ...prev,
+            `Error fetching Rizzlord info: ${(error as Error).message}`,
+          ]);
+        }
+      }
+    else if (cmd === 'chill_guy') {
       setTerminalContent((prev) => [...prev, 'Exiting...']);
       if (onExit) onExit();
-    } else {
-      setTerminalContent((prev) => [...prev, `Unknown command: ${cmd}`]);
+    } 
+    else {
+        {
+            // Assume the command is a brainrot term
+            try {
+              const response = await fetch(`http://127.0.0.1:8000/api/${cmd}`);
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              const data = await response.json();
+              const termInfo = [
+                `Term: ${data.term}`,
+                `Definition: ${data.definition}`,
+                `Example: ${data.example}`,
+              ];
+              setTerminalContent((prev) => [...prev, ...termInfo]);
+            } catch (error) {
+              setTerminalContent((prev) => [...prev, `Unknown command or term: ${cmd}`]);
+            }
+          }
     }
   };
 

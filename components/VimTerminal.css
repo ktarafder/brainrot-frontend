@@ -9,6 +9,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    outline: none;
   }
   
   .terminal-content {
@@ -36,4 +37,3 @@
       background-color: transparent;
     }
   }
-  
