@@ -24,14 +24,12 @@ export default function Results() {
       <p className="text-3xl mb-6 animate-spin-slow">
         Your Score: <span className="text-yellow-400">{brainrotData.score}</span>
       </p>
+      <p className="mt-1 mb-6 text-sm text-gray-300 italic">
+        "{brainrotData.roast}"
+      </p>
       <div className="w-full max-w-2xl p-6 rounded-lg border border-yellow-300 bg-black/50 backdrop-blur-md shadow-2xl">
         <h2 className="text-2xl font-bold underline mb-4">☠ Suggestions ☠</h2>
         <div className="space-y-3 text-lg">
-          <div
-            className="p-4 border border-dashed border-pink-500 rounded-md bg-black/30 text-center"
-          >
-            <span className="italic text-red-400">"{brainrotData.roast}"</span>
-          </div>
           {Object.keys(brainrotData)
             .filter((key) => key.startsWith("suggestion"))
             .map((key, index) => (
@@ -44,6 +42,7 @@ export default function Results() {
             ))}
         </div>
       </div>
+      
       <div className="absolute bottom-4 text-xs text-gray-400 animate-pulse">
         Brainrot Data © 2024. Consume Responsibly.
       </div>
