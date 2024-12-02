@@ -1,6 +1,5 @@
 "use client";
 import { useBrainrot } from "@/context/BrainrotContext";
-import Image from "next/image";
 
 export default function Results() {
   const brainrotContext = useBrainrot();
