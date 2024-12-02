@@ -61,7 +61,9 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
     '   2. Type a brainrot word directly:',
     '      If you drop a brainrot word the terminal will spit out what',
     '      it means and why it’s skibidi.',
-    '                                      ',
+    '                                                                 ',
+    '   Other fun commands: brainrot, don pollo, rizzlord, clear      ',
+    '                                                                 ',
     'Yo, just make sure to slap a ":" at the beginning of what you type to make the magic happen. No colon, no rizz—don’t be cringe, get it right!',
     '                                      '
   ];
@@ -220,7 +222,7 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
           ]);
         }
       }
-    else if (cmd === 'chill_guy') {
+    else if (cmd === 'chillguy') {
       setTerminalContent((prev) => [...prev, 'Exiting...']);
       if (onExit) onExit();
     } 

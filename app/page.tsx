@@ -1,13 +1,23 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import VimTerminal from "@/components/VimTerminal";
+import { useBrainrot } from "@/context/BrainrotContext";
+
 
 export default function Home() {
   const [showTerminal, setShowTerminal] = useState(false);
+  const brainrotContext = useBrainrot();
+  if (!brainrotContext) {
+    throw new Error("BrainrotContext is null");
+  }
+  const { setBrainrotData } = brainrotContext;
+  const router = useRouter();
 
   // Function to handle terminal exit
   const handleTerminalExit = () => {
     setShowTerminal(false);
+    router.push("/results");
   };
 
   // Words to float around the screen
@@ -61,7 +71,7 @@ export default function Home() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log('File uploaded successfully:', data);
+          setBrainrotData(data);   
         } else {
           console.error('File upload failed:', response.statusText);
         }
