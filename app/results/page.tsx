@@ -1,5 +1,6 @@
 "use client";
 import { useBrainrot } from "@/context/BrainrotContext";
+import Image from "next/image";
 
 export default function Results() {
   const brainrotContext = useBrainrot();
@@ -27,7 +28,9 @@ export default function Results() {
       <p className="mt-1 mb-6 text-sm text-gray-300 italic">
         "{brainrotData.roast}"
       </p>
-      <div className="w-full max-w-2xl p-6 rounded-lg border border-yellow-300 bg-black/50 backdrop-blur-md shadow-2xl">
+      
+      <div className="relative w-full max-w-4xl p-6 rounded-lg border border-yellow-300 bg-black/50 backdrop-blur-md shadow-2xl mr-10">
+        {/* Suggestions Section */}
         <h2 className="text-2xl font-bold underline mb-4">☠ Suggestions ☠</h2>
         <div className="space-y-3 text-lg">
           {Object.keys(brainrotData)
@@ -40,6 +43,56 @@ export default function Results() {
                 <span className="italic">{brainrotData[key]}</span>
               </div>
             ))}
+        </div>
+
+        {/* Images Outside - Right */}
+        <div className="absolute top-0 right-[-250px] flex flex-col gap-4">
+          <img
+            src="/donpollo.png"
+            alt="Image 1"
+            width={200}
+            height={300}
+            className=""
+          />
+          <img
+            src="/chill_guy.png"
+            alt="Image 2"
+            width={200}
+            height={300}
+            className=""
+          />
+          <img
+            src="/amongus.png"
+            alt="Image 3"
+            width={200}
+            height={300}
+            className=""
+          />
+        </div>
+
+        {/* Images Outside - Left */}
+        <div className="absolute top-0 left-[-250px] flex flex-col gap-4">
+          <img
+            src="/GiantST.jpg"
+            alt="Left Image 1"
+            width={200}
+            height={300}
+            className=""
+          />
+          <img
+            src="/GTA6.png"
+            alt="Left Image 2"
+            width={200}
+            height={300}
+            className=""
+          />
+          <img
+            src="/shocked-face.png"
+            alt="Left Image 2"
+            width={200}
+            height={300}
+            className=""
+          />
         </div>
       </div>
       

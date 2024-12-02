@@ -64,7 +64,7 @@ export default function Home() {
 
       try {
         setShowTerminal(true);
-        const response = await fetch('http://127.0.0.1:5000/upload', {
+        const response = await fetch('https://brainrot-backend-51e1.onrender.com/upload', {
           method: 'POST',
           body: formData,
         });
@@ -110,13 +110,7 @@ export default function Home() {
         </div>
       )}
 
-      <button
-        onClick={() => setShowTerminal(true)}
-        className="fixed bottom-4 right-4 p-4 bg-purple-600 text-white rounded-full"
-      >
-        Open Terminal
-      </button>
-
+    
 
 
       {/* Glitch Banner */}
@@ -139,13 +133,9 @@ export default function Home() {
 
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)] text-white">
           <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
+            Upload a PDF file to see its brainrot score.{" "}  
           </li>
-          <li>Save and see your changes instantly.</li>
+          <li>Get suggestions to make your file more brainrotted.</li>
         </ol>
 
         {/* File Dropbox Section */}

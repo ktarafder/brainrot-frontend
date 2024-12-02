@@ -129,7 +129,7 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
     }
     else if (cmd === 'brainrot') {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/brainrot');
+        const response = await fetch('https://brainrot-api.onrender.com/api/brainrot');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -146,7 +146,7 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
     } 
     else if (cmd == 'random') {
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/brainrot/random');
+            const response = await fetch('https://brainrot-api.onrender.com/api/brainrot/random');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -163,7 +163,7 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
     }
     else if (cmd === 'don pollo') {
         try {
-          const response = await fetch('http://127.0.0.1:8000/api/don-pollo');
+          const response = await fetch('https://brainrot-api.onrender.com/api/don-pollo');
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
@@ -195,7 +195,7 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
     }
     else if (cmd === 'rizzlord') {
         try {
-          const response = await fetch('http://127.0.0.1:8000/rizzlord');
+          const response = await fetch('https://brainrot-api.onrender.com/rizzlord');
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
@@ -229,7 +229,7 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
     else {
         {
             try {
-              const response = await fetch(`http://127.0.0.1:8000/api/${cmd}`);
+              const response = await fetch(`https://brainrot-api.onrender.com/api/${cmd}`);
               if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
               }
