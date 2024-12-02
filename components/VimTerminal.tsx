@@ -151,21 +151,21 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
           }
           const data = await response.json();
           const donPolloInfo = [
-            `Name: ${data.name}`,
-            `Title: ${data.title}`,
+            `Name: ${data.donpollo.name}`,
+            `Title: ${data.donpollo.title}`,
             '',
             'Backstory:',
-            data.backstory,
+            data.donpollo.backstory,
             '',
             'Achievements:',
-            ...data.achievements.map((achievement: string) => `- ${achievement}`),
+            ...data.donpollo.achievements.map((achievement: string) => `- ${achievement}`),
             '',
-            `Vibe: ${data.vibe}`,
+            `Vibe: ${data.donpollo.vibe}`,
             '',
             'Quotes:',
-            ...data.quotes.map((quote: string) => `- "${quote}"`),
+            ...data.donpollo.quotes.map((quote: string) => `- "${quote}"`),
             '',
-            data.message,
+            data.donpollo.message,
           ];
           setTerminalContent((prev) => [...prev, ...donPolloInfo]);
         } catch (error) {
