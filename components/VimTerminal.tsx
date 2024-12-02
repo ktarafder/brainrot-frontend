@@ -47,11 +47,27 @@ const VimTerminal: React.FC<VimTerminalProps> = ({ onExit }) => {
     '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡏⠀⡄⡀⠙⢾⣟⢯⣿⡿⠿⠿⢿⣿⣿⡿⣿⠀⠀',
     '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⣤⣤⣤⣤⣼⣿⣿⡇⠈⠠⠄⠀⠙⣿⣿⡿⠀⠀',
     '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠁⠀⠀⠀⠘⠿⣭⣉⣉⣩⡵⠋⠀',
-    'Only one way to exit...',
+    '                                      ',
+    'Uh-oh, there’s an obstacle blocking your way! Type in the secret code to escape the terminal.',
+    '                                      ',
+    'How to escape: You gotta type a specific brainrot word. If you nail it, boom! Instant exit. If you don’t… well, keep guessing or live in eternal cringe.',
+    '                                      ',
+    'While you’re stuck in the terminal, you can flex with some commands:',
+    '                                      ',
+    '   1. Type ":random":',
+    '      This command will pull up info about a random brainrot term.',
+    '      It’s like rolling the dice but with extra sigma energy.',
+    '                                      ',
+    '   2. Type a brainrot word directly:',
+    '      If you drop a brainrot word the terminal will spit out what',
+    '      it means and why it’s skibidi.',
+    '                                      ',
+    'Yo, just make sure to slap a ":" at the beginning of what you type to make the magic happen. No colon, no rizz—don’t be cringe, get it right!',
+    '                                      '
   ];
 
   const asciiArtLines = asciiArt.length;
-  const TOTAL_LINES = 30; 
+  const TOTAL_LINES = 100; 
   const emptyLinesCount = Math.floor((TOTAL_LINES - asciiArtLines) / 2);
   const emptyLines = new Array(emptyLinesCount).fill('');
 
